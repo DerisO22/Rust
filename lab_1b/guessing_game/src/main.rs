@@ -36,7 +36,6 @@ fn main() {
     let mut rng = rand::thread_rng();
     let mut num_to_guess: i32 = 0;
     generate_rand_num(&mut num_to_guess, &mut rng, difficulty_choice);
-    println!("{}", num_to_guess);
 
     loop {
         let user_answer: i32 = get_user_input("Enter Number").parse().expect("Please enter a number");

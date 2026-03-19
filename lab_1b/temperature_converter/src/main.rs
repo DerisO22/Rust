@@ -47,7 +47,7 @@ fn fahrenheit_to_kelvin(value: f32) -> f32 {
 
 fn kelvin_to_fahrenheit(value: f32) -> f32 {
     let result: f32 = (value - 273.15) * 9.0 / 5.0 + 32.0;
-    println!("\nConverting {}°K to Farhrenheit: \nResult = {}°F\n", value, result);
+    println!("\nConverting {}°K to Fahrenheit: \nResult = {}°F\n", value, result);
     return result;
 }
 
