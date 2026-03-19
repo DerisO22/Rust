@@ -16,33 +16,39 @@ const MENU_PROMPT: &str =
     More overhead though
 */
 fn celcius_to_fahrenheit(value: f32) -> f32 {
-    println!("\nConverting {}°C to Fahrenheit:", value);
-    value * 9.0 / 5.0 + 32.0
+    let result: f32 = value * 9.0 / 5.0 + 32.0;
+    println!("\nConverting {}°C to Fahrenheit: \nResult = {}°F\n", value, result);
+    return result;
 }   
 
 fn fahrenheit_to_celcius(value: f32) -> f32 {
-    println!("\nConverting {}°F to Celcius:", value);
-    (value - 32.0) * 5.0 / 9.0
+    let result: f32 = (value - 32.0) * 5.0 / 9.0;
+    println!("\nConverting {}°F to Celcius: \nResult = {}°C\n", value, result);
+    return result;
 }
 
 fn celcius_to_kelvin(value: f32) -> f32 {
-    println!("\nConverting {}°C to Kelvin:", value);
-    value + 273.15
+    let result: f32 = value + 273.15;
+    println!("\nConverting {}°C to Kelvin: \nResult = {}°K\n", value, result);
+    return result;
 }
 
 fn kelvin_to_celcius(value: f32) -> f32 {
-    println!("\nConverting {}°K to Celcius:", value);
-    value - 273.15
+    let result: f32 = value - 273.15;
+    println!("\nConverting {}°K to Celcius: \nResult = {}°C\n", value, result);
+    return result;
 }
 
 fn fahrenheit_to_kelvin(value: f32) -> f32 {
-    println!("\nConverting {}°F to Kelvin:", value);
-    (value - 32.0) * 5.0 / 9.0 + 273.15
+    let result: f32 = (value - 32.0) * 5.0 / 9.0 + 273.15;
+    println!("\nConverting {}°F to Kelvin: \nResult = {}°K\n", value, result);
+    return result;
 }
 
 fn kelvin_to_fahrenheit(value: f32) -> f32 {
-    println!("\nConverting {}°K to Farhrenheit:", value);
-    (value - 273.15) * 9.0 / 5.0 + 32.0
+    let result: f32 = (value - 273.15) * 9.0 / 5.0 + 32.0;
+    println!("\nConverting {}°K to Farhrenheit: \nResult = {}°F\n", value, result);
+    return result;
 }
 
 fn get_user_input(prompt: &str) -> String {
@@ -89,7 +95,5 @@ fn main() {
         let user_conv_value: f32 = get_user_input(prompt).parse().expect("Please enter a number");
 
         let result: f32 = handle_user_option(user_conv_option, user_conv_value);
-
-        println!("Result: {}°\n", result);
     }
 }
