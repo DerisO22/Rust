@@ -39,6 +39,17 @@ fn main() {
 
     loop {
         let user_answer: i32 = get_user_input("Enter Number").parse().expect("Please enter a number");
+
+        // match user_answer {
+        //     Ok(user_answer) => {
+                
+        //     }
+        //     Err(_) => {
+        //         println!("Invalid input: Not a valid number.");
+        //         continue;
+        //     }
+        // }
+
         total_guesses+=1;
 
         if user_answer > num_to_guess {

@@ -40,20 +40,31 @@ fn get_user_input(enter_prompt: &str) -> String {
 }
 
 fn main() {
-    // Number 1
-    let prompt = "\nEnter a number";
-    let num1_input: i32 = get_user_input(&prompt).parse().expect("Please enter a number");
 
-    // Operation
-    let prompt = "Enter an operation(+, -, *, /)";
-    let operation_input: char = get_user_input(prompt).parse().expect("Please enter an operation(+, -, *, /)");
+    loop {
+        // Number 1
+        let prompt = "\nEnter a number";
+        let num1_input: i32 = get_user_input(&prompt).parse().expect("Please enter a number");
 
-    // Number 2
-    let prompt = "Enter a number";
-    let num2_input: i32 = get_user_input(&prompt).parse().expect("Please enter a number");
+        // Operation
+        let prompt = "Enter an operation(+, -, *, /)";
+        let operation_input: char = get_user_input(prompt).parse().expect("Please enter an operation(+, -, *, /)");
 
-    let result: i32 = handle_operation(operation_input, num1_input, num2_input);
+        // Number 2
+        let prompt = "Enter a number";
+        let num2_input: i32 = get_user_input(&prompt).parse().expect("Please enter a number");
 
-    // output
-    println!("\n{} {} {} = {}", num1_input, operation_input, num2_input, result);
+        let result: i32 = handle_operation(operation_input, num1_input, num2_input);
+
+        // output
+        println!("\n{} {} {} = {}", num1_input, operation_input, num2_input, result);
+
+        // ask to calc again
+        let cal_again_input = get_user_input("\nCalculate Again(y/n)?").to_lowercase().chars().next().unwrap_or(' ');
+
+        if cal_again_input != 'y' {
+            println!("\nGoodbye!");
+            break;
+        }
+    }
 }
