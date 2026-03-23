@@ -1,6 +1,73 @@
 use rand::Rng;
 use std::io::{self, Write};
 
+enum DifficultyLevels {
+    EASY,
+    MEDIUM,
+    HARD
+}
+
+struct GuessingGame {
+    difficulty: &str,
+    number_to_guess: u16,
+    range: (u16, u16),
+    max_attempts: u16,
+}
+
+// can be for individual games
+struct GamePlayer {
+    total_guesses: u16,
+    multiplier: u16,
+    total_bet: u16,
+    current_money: u16,
+}
+
+trait GameLoop {
+    fn get_difficulty_input(&self) -> &str;
+    fn generate_range(&self) -> (u16, u16);
+    fn generate_random_num_in_range(&self) -> u16;
+}
+
+trait GamePlayerLoop {
+    fn get_user_bet(&self) -> u16;
+    fn check_guesses_over(&self) -> bool;
+    fn calculate_bet_win(&self) -> u16;
+    fn set_current_money(&self);
+}
+
+// Will be adding more params for the functions
+impl GameLoop for GuessingGame {
+    fn get_difficulty_input(&self) -> &str {
+        
+    }
+
+    fn generate_range(&self) -> (u16, u16) {
+
+    }
+
+    fn generate_random_num_in_range(&self) -> u16 {
+
+    }
+}
+
+impl GamePlayerLoop for GamePlayer {
+    fn get_user_bet(&self) -> u16 {
+
+    }
+
+    fn check_guesses_over(&self) -> bool {
+
+    }
+
+    fn calculate_bet_win(&self) -> u16 {
+
+    }
+
+    fn set_current_money(&self) {
+
+    }
+} 
+
 const DIFFICULTY_OPTIONS_STR: &str = 
 " 1.   Easy, 1 - 50
  2. Medium, 1 - 200
