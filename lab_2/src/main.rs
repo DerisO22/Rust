@@ -1,7 +1,6 @@
 use rand::Rng;
 use std::io::{self, Write};
 
-
 const GAME_MODES_STR: &str = 
 " 1.        Forever - Play as long as you want
  2.   Sudden Death - First to win a round
@@ -14,7 +13,8 @@ Enter Number";
 enum Move {
     ROCK,
     PAPER,
-    SCISSORS
+    SCISSORS,
+    END_GAME
 }
 
 #[derive(Debug, PartialEq, Clone, Copy)]
@@ -35,7 +35,7 @@ enum Outcome {
 struct RPSGame {
     player: RPSPlayer,
     computer: RPSPlayer,
-    rounds: u16
+    rounds: u16,
 }
 
 struct RPSPlayer {
@@ -45,18 +45,29 @@ struct RPSPlayer {
 
 impl GameMode {
     fn get_mode_input(prompt: &str) -> Option<GameMode> {
-        print!("\n{}: ", prompt);
-        io::stdout().flush().expect("Failed to flush stdout");
-    
-        let mut input = String::new();
-        io::stdin().read_line(&mut input).expect("Failed to read");
+        loop {
+            print!("\n{}: ", prompt);
+            io::stdout().flush().expect("Failed to flush stdout");
+        
+            let mut input = String::new();
+            io::stdin().read_line(&mut input).expect("Failed to read");
 
-        match input.trim().parse::<i32>() {
-            Ok(1) => Some(GameMode::FOREVER),
-            Ok(2) => Some(GameMode::SUDDEN_DEATH),
-            Ok(3) => Some(GameMode::BEST_OF_FIVE),
-            Ok(4) => Some(GameMode::FIRST_TO_THREE),
-            _ => None
+            let val = input.trim().parse::<i32>().unwrap_or(0);
+
+            if val < 1 || val > 4 {
+                println!("\nInvalid Input! Try Again\n");
+                continue;
+            }
+
+            match val {
+                1 => return Some(GameMode::FOREVER),
+                2 => return Some(GameMode::SUDDEN_DEATH),
+                3 => return Some(GameMode::BEST_OF_FIVE),
+                4 => return Some(GameMode::FIRST_TO_THREE),
+                _ => return None,
+            };
+
+            return None;
         }
     }
 }
@@ -73,7 +84,7 @@ impl Move {
             "rock" | "r" => Some(Move::ROCK),
             "paper" | "p" => Some(Move::PAPER),
             "scissors" | "s" => Some(Move::SCISSORS),
-            _ => None
+            _ => Some(Move::END_GAME),
         }
     }
 
@@ -192,6 +203,11 @@ fn main() {
         // rounds in a game
         loop {
             let player_move = Move::get_user_move("Enter Move(rock, paper, scissors)").expect("Invalid Move");
+
+            if (player_move == Move::END_GAME) {
+                break;
+            }
+
             game.play_round(player_move);
 
             if game.is_game_over(game_mode) {
